@@ -350,14 +350,14 @@ npm run test:e2e
 
 ## Additional Documentation (`docs/`)
 
-- [Admin Panel, Steam Sign-In & Map Veto Guide](docs/ADMIN.md) *(TR)*
-- [Operations, DatHost Server Controls & Full Backup Guide](docs/OPERATIONS.md) *(TR)*
-- [Live CS2 Match Setup with DatHost](docs/LIVE-SERVER.md) *(TR)*
-- [MatchZy Webhook & Live Stats Architecture](docs/MATCHZY.md) *(TR)*
-- [Cloudflare Workers (`workers.dev`) Setup Guide](docs/WORKERS.md) *(TR)*
-- [Private 1v1 Rooms & Solo Bot Training Guide](docs/1V1.md) *(TR)*
-- [User Roles & Access Boundaries](docs/ROLES.md) *(TR)*
-- [Static Online Preview (ZIP) Guide](docs/ONLINE-TEST.md) *(TR)*
+- [Admin Panel, Steam Sign-In & Map Veto Guide](docs/ADMIN.md)
+- [Operations, DatHost Server Controls & Full Backup Guide](docs/OPERATIONS.md)
+- [Live CS2 Match Setup with DatHost](docs/LIVE-SERVER.md)
+- [MatchZy Webhook & Live Stats Architecture](docs/MATCHZY.md)
+- [Cloudflare Workers (`workers.dev`) Setup Guide](docs/WORKERS.md)
+- [Private 1v1 Rooms & Solo Bot Training Guide](docs/1V1.md)
+- [User Roles & Access Boundaries](docs/ROLES.md)
+- [Static Online Preview (ZIP) Guide](docs/ONLINE-TEST.md)
 
 ---
 

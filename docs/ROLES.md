@@ -1,25 +1,24 @@
-# Roller ve erişim sınırları
+# User Roles & Access Boundaries
 
-Yetki tarayıcıdan gönderilen role, takım kimliğine veya oyuncu kimliğine göre verilmez. Sunucu, HttpOnly oturumunu ve kayıtlı kadroyu kullanır. Düğme gizlemek tek başına yetki kontrolü değildir.
+Permissions are never trusted from browser-supplied roles, team IDs, or player IDs. The server derives all access strictly from the `HttpOnly` session cookie and saved D1 rosters. Hiding buttons in the UI is never the sole security boundary.
 
-| Rol | Yapabilecekleri | Sınır |
+| Role | Allowed Actions | Boundaries |
 | --- | --- | --- |
-| Ziyaretçi | Maçları, sonuçları, takımları, kuralları ve gerçek veto ilerleyişini okumak | Hazır veremez; takım, kadro, veto, sonuç veya sunucu değiştiremez. Sunucu bağlantısı ve yönetim kayıtları gösterilmez. |
-| Oyuncu | Kayıtlı olduğu maçta kendi hazır durumunu değiştirmek; kendi özel 1v1 odasına erişmek | Başkası adına hazır veremez. Kadro, kaptan ve seri başı değiştiremez. |
-| Kaptan | Oyuncunun yetkileri; kendi takımının adı, kısa adı ve logosunu düzenlemek; kendi sırasındaki gerçek veto hamlesi | Başka takımı düzenleyemez. Oyuncu ekleyemez, SteamID ve kaptan atayamaz. Prova vetosu yöneticiye aittir. |
-| Site admini | Kadrolar, kaptan atama, eşleşme, takvim, skor, veto müdahalesi, sunucu kontrolü ve özel oda oluşturma | Admin girişi Steam doğrulaması değildir. Oyuncu adına hazır veremez; gerektiğinde açıkça hazır kontrolünü aşan işlemi kullanır. |
+| **Visitor** | View matches, results, teams, rules, and live veto progress | Cannot mark ready or edit teams, rosters, vetoes, scores, or server controls. Server join addresses and admin logs are hidden. |
+| **Player** | Toggle own ready status on assigned matches; access own private 1v1 rooms | Cannot mark ready for other players. Cannot edit rosters, captains, or seeds. |
+| **Captain** | All Player permissions; edit own team's name, short tag, and logo; submit real veto moves on own turn | Cannot edit other teams, add/remove players, or change SteamIDs/captains. Rehearsal vetoes are admin-only. |
+| **Site Admin** | Manage rosters, captains, matchups, settings, scores, veto overrides, server controls, backups, and 1v1 rooms | Admin login is separate from Steam verification and never forges player readiness (explicit bypass confirmation is required). |
 
-Steam girişi tek başına turnuva oyuncusu veya kaptanı yapmaz. Kadro eşleşmesi gerekir. Kaptan adminin kaydettiği kadrodan alınır. Başlamış maçlar dondurulmuş kadroyu ve kaptanını kullanır.
+Signing in with Steam alone does not grant player or captain rights — the verified SteamID64 must match a saved roster entry. Active and completed matches use their frozen lineup and captain snapshot.
 
-Bir oyuncu kaydının SteamID’si değiştirildiğinde yeni hesap eski hesabın doğrulamasını veya maç hazırlığını devralmaz. Doğrulamalar güncel kadro ve maçın saklanan kadrosu için ayrı değerlendirilir. Kadrodan çıkarılan oyuncu sürmekte olan kayıtlı maçına katılabilir; maç sonuçlandığında bu geçmiş katılım yeni sunucu erişimi sağlamaz. Eski maçın kaptanı güncel takım profilini düzenleyemez; yeni kaptan da eski maçın veto yetkisini devralmaz.
+If a player slot's SteamID64 is replaced, the new account does not inherit the previous account's verification, readiness, or captain permissions. A replaced player can finish an already-frozen active match, but once that match completes, former participation grants no further server access.
 
-## Tarayıcıya gönderilen veriler
+## Data Exposure to Browsers
 
-- Admin yönetim için gereken tam görünümü alır.
-- Diğer kullanıcılar başka oyuncuların kayıtlı SteamID listesini veya tüm Steam doğrulama kayıtlarını alamaz; yalnızca kendi SteamID bilgisini alır.
-- Doğrulanma ve hazır durumları oyuncu kayıt kimlikleriyle gösterilir.
-- DatHost kimliği ve kurtarma ayrıntıları admin dışına verilmez. Sunucu bağlantısı kayıtlı oyuncuya veya admine; özel 1v1 bağlantısı ilgili odanın oyuncusuna veya admine verilir.
-- Admin provası ziyaretçi ve oyuncu görünümüne girmez. Kaptan prova hamlesi yapamaz.
-- Canlı/tamamlanan maç istatistiklerindeki SteamID kimlikleri herkese açık maç performansının parçasıdır. Bu uç özel 1v1 istatistiklerini veya tüm doğrulanmış hesapları yayınlamaz.
+- Admins receive the full management snapshot required for operations.
+- Non-admin users never receive other players' SteamID64 lists or global Steam registration records — only their own SteamID64.
+- DatHost server IDs and recovery details are admin-only. Server join addresses are shown only to rostered players/admins (or room participants/admins for private 1v1s).
+- Admin rehearsal vetoes are never exposed to visitors or players, and captains cannot operate rehearsal vetoes.
+- SteamIDs inside public completed/live tournament match stats are part of public match scoreboards; private 1v1 stats and global verified accounts are never leaked there.
 
-Maç dosyaları ve sunucu kontrolleri admin oturumu veya gereken sunucu anahtarı ister. Yazma uçları ayrıca istek kaynağını doğrular. Özel odanın adresi bilinse bile ilgili oyuncu ve admin dışına erişim kapalıdır.
+Match config downloads and server controls require either an admin session or the configured webhook secret. All write endpoints enforce same-origin checks.

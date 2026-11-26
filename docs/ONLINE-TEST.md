@@ -1,47 +1,40 @@
-# Cloudflare üzerinde çevrimiçi deneme
+# Static Online Preview (Cloudflare Pages Direct Upload)
 
-Bu sürümü bir sunucu veya veritabanı kurmadan Cloudflare Pages'te deneyebilirsin.
+You can preview the frontend UI and local bracket simulator on Cloudflare Pages without setting up a database or backend.
 
-Bu ZIP yalnızca arayüz ve kişisel deneme içindir. **Gerçek MatchZy istatistikleri için [Functions + D1 kurulumunu](MATCHZY.md) GitHub bağlantılı Pages projesinde yap.** Statik ZIP yüklemek API uç noktalarını yayınlamaz.
+> **Important:** This static ZIP is for **UI preview and browser-local trial only**. For real Steam login, shared map vetoes, and live MatchZy scores, deploy via GitHub-connected Pages Functions ([MatchZy Guide](MATCHZY.md)) or Workers ([Workers Guide](WORKERS.md)).
 
-## Hazır paketi yükle
+## Upload the Ready-Made Package
 
-1. Hazırlanan `kampus-arena-test.zip` dosyasını bilgisayarına indir.
-2. [Cloudflare Dashboard](https://dash.cloudflare.com/) hesabında **Workers & Pages** bölümünü aç.
-3. **Create application → Pages → Upload assets / Drag and drop** yoluyla bir Pages projesi oluştur. Menü farklı görünürse Pages için **Direct Upload** seçeneğini ara. Worker oluşturma akışını seçme.
-4. Projeye örneğin `kampus-arena-test` adını ver, ZIP dosyasını yükle ve **Deploy site** ile yayınla. Bu hazır paket için build komutu girmen gerekmez.
-5. Cloudflare'ın verdiği `https://…pages.dev` adresini aç. Kişisel deneme için adresin sonuna `/#dene`, yönetim provası için `/#admin` ekle. Özel alan adı gerekmez.
+1. Generate `artifacts/kampus-arena-test.zip` locally (see below).
+2. Open **Workers & Pages** in the [Cloudflare Dashboard](https://dash.cloudflare.com/).
+3. Choose **Create → Pages → Direct Upload (Upload assets / Drag and drop)**. Do not select the Worker flow.
+4. Name the project (e.g. `kampus-arena-test`), upload the ZIP, and click **Deploy site** (no build command needed).
+5. Open the resulting `https://...pages.dev` URL. Append `/#dene` for the bracket simulator or `/#admin` for the local admin rehearsal.
 
-Paketin kökünde `index.html` bulunur; dosyaları bir üst klasörün içine taşıma. ZIP yüklemesi yerine klasör istenirse arşivi açıp içindeki dosyaları yükle. Proje yeniden oluşturulmadan sonraki paketler aynı projenin **Create deployment / Upload assets** bölümünden yüklenebilir.
+`index.html` is at the root of the archive. Future updates can be uploaded to the same project under **Create deployment / Upload assets**.
 
-## İlk deneme
+## Quick Trial Walkthrough
 
-1. `/#dene` ekranında U2 maçını seç. Durumu **Tamamlandı**, skoru **13 : 7** yap ve kaydet.
-2. U5'te NOVA–PARALLAX, L1'de ORBIT–VOID eşleşmelerini kontrol et. Ana sayfadaki turnuva ağacı da aynı bilgiyi gösterir.
-3. U5'e canlı **1 : 0** harita skoru gir. Sonra U2 sonucunu **7 : 13** olarak düzelt. U5'in sonucunun temizleneceği uyarısını kontrol et; önce iptal edip sonra onaylamayı dene.
-4. Sayfayı yenile. Sonuçların aynı tarayıcıda kaldığını kontrol et. **JSON yedeği indir** ile denemeni dışa aktarabilirsin.
-5. **Sıfırdan başlat** ile turnuvayı baştan oyna. Açılış maçları BO1 raunt skorudur; diğer maçlar BO3 harita skorudur (**2 : 0** veya **2 : 1**).
-6. İkinci final açıkken alt koldan gelen takım ilk finali kazanırsa **GF2** açılır. Şampiyon bu seri bittikten sonra belirlenir.
+1. Open `/#dene`, select match `U2`, set status to **Completed** with score **13 : 7**, and save.
+2. Verify `U5` updates to `NOVA–PARALLAX` and `L1` updates to `ORBIT–VOID` on both the simulator and homepage bracket.
+3. Enter a live `1 : 0` map score on `U5`, then change `U2` to `7 : 13` to test downstream invalidation confirmation.
+4. Reload the page to confirm browser persistence, or export/import via **Download JSON backup**.
+5. Opening matches use BO1 round scores; later rounds use BO3 map scores (`2 : 0` or `2 : 1`). With the second grand final enabled, a lower-bracket win in `GF` unlocks `GF2`.
 
-## Bu test sürümünün kayıt davranışı
+## Limitations of Static Preview
 
-- Sonuçlar aynı tarayıcıda, aynı site adresinde saklanır. Telefonda, başka tarayıcıda veya gizli sekmede ayrı bir deneme açılır. Çok cihazlı ortak canlı skor henüz yoktur.
-- **Turnuvayı dene** herkese açık bir simülasyon ekranıdır; kendi tarayıcındaki denemeni düzenler. Gerçek turnuva yönetimi ve sunucuda parola kontrolü bir sonraki aşamadır.
-- Tarayıcı verilerini temizlemek denemeyi siler. Yedek indirip başka cihazda **Yedekten yükle** ile taşıyabilirsin. Site adresi değişirse yeni adreste de yedeğini yüklemen gerekir.
-- İki yenilgi kuralını korumak için ikinci final serisi varsayılan olarak açıktır. Kapatırsan büyük final tek seri olur; üst kol takımı bir yenilgiyle elenebilir.
-- Harita listesi bir deneme havuzudur. Veto akışı ve gerçek maç takvimi henüz eklenmedi. Skorlar oyun sunucusundan otomatik alınmaz.
+- Data is stored only in `localStorage` of the current browser and origin — no cross-device sync.
+- Clearing browser storage deletes trial data unless exported as JSON.
+- No Steam OpenID sign-in, shared veto, or live MatchZy server integration.
 
-## Paketi yeniden üret
+## Rebuilding the Static ZIP
 
-Depo dizininde:
-
-```sh
+```bash
 npm ci
 npm test
 npm run test:e2e
 npm run package:test
 ```
 
-Tarayıcı testleri için önce `npx playwright install chromium` çalıştır. Paket `artifacts/kampus-arena-test.zip` olarak üretilir; kaynak kod, `node_modules` veya kişisel tarayıcı kaydı içermez.
-
-Bu yönerge yayınlamayı senin hesabında yapman içindir. ZIP'in hazırlanması veya yerel tarayıcı kontrollerinin geçmesi, Cloudflare'a yayın yapıldığı anlamına gelmez. Adresi aldıktan sonra yukarıdaki ilk denemeyi o adreste de uygula.
+Outputs `artifacts/kampus-arena-test.zip` (excludes source code, `node_modules`, and personal browser data).
