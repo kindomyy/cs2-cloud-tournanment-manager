@@ -1,0 +1,13 @@
+node_modules/
+dist/
+*.local
+.DS_Store
+playwright-report/
+test-results/
+*.tsbuildinfo
+artifacts/
+.wrangler/
+.dev.vars*
+.env*
+wrangler.local.jsonc
+config/matchzy/config_override.cfg

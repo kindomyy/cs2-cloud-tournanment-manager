@@ -1,0 +1,31 @@
+.account-header .header-inner {
+  max-width: 1440px;
+  gap: 24px;
+}
+.account-header .brand { min-width: 0; }
+.account-header .brand > span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.account-header .main-nav { gap: 24px; }
+.account-header.is-minimal .main-nav,
+.account-header.is-minimal .header-right,
+.account-header.is-minimal .mobile-menu { display: none; }
+.account-header.is-minimal .brand { margin-left: auto; }
+.minimal-tournament { padding-top: 32px; padding-bottom: 48px; }
+.minimal-tournament > .bracket-section { padding-top: 28px; }
+.minimal-current-match { margin-bottom: 36px; }
+.minimal-tournament > .bracket-section:first-child { padding-top: 0; }
+@media (max-width: 900px) {
+  .account-header .header-inner { gap: 16px; }
+  .account-header .header-right { display: none; }
+  .account-header .main-nav { gap: 16px; }
+}
+@media (max-width: 560px) {
+  .account-header .header-inner { gap: 10px; padding-inline: 16px; }
+  .account-header .brand { flex: 1; font-size: 13px; justify-content: flex-end; gap: 8px; }
+  .account-header .brand-symbol { width: 27px; height: 30px; }
+  .account-header .brand-symbol svg { width: 23px; height: 23px; }
+  .account-header .brand small { font-size: 6px; letter-spacing: 1.2px; }
+  .account-header .mobile-menu { margin-left: 0; }
+  .account-header .main-nav { gap: 5px; }
+  .minimal-tournament { padding-top: 24px; }
+  .minimal-current-match { margin-bottom: 24px; }
+}

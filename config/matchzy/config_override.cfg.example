@@ -1,0 +1,7 @@
+// Copy to csgo/cfg/MatchZy/config_override.cfg on your DatHost server.
+// Replace the HTTPS origin and secret locally. Do not commit your real secret.
+matchzy_remote_log_url "https://SENIN-SITEN.pages.dev/api/webhooks/matchzy"
+matchzy_remote_log_header_key "Authorization"
+matchzy_remote_log_header_value "Bearer SENIN_WEBHOOK_SECRETIN"
+matchzy_ready_mode 0
+matchzy_time_to_start 0

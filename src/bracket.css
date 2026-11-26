@@ -1,0 +1,93 @@
+.stacked-brackets .bracket-panel {
+  margin-bottom: 22px;
+  min-width: 0;
+}
+.bracket-lane-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+}
+.bracket-lane-heading h3 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 17px;
+  font-weight: 550;
+  margin: 0;
+}
+.bracket-lane-heading h3 > svg { color: var(--accent); }
+.bracket-lane-heading p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #b6bec6;
+}
+.stacked-brackets .bracket-grid.upper {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  min-width: 900px;
+}
+.stacked-brackets .bracket-grid.lower {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  min-width: 1080px;
+}
+.stacked-brackets .bracket-scroll {
+  width: 100%;
+  overscroll-behavior-x: contain;
+}
+.stacked-brackets .bracket-navigation { display: none; }
+.stacked-brackets .grand-final {
+  min-height: 0;
+  padding: 26px 24px;
+}
+.stacked-brackets .grand-final h4 {
+  margin: 0 0 24px;
+  font-size: 26px;
+  font-weight: 500;
+  text-align: center;
+}
+.stacked-brackets .final-matches {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+}
+.stacked-brackets .final-series {
+  min-width: 0;
+  width: 310px;
+  max-width: 100%;
+}
+.stacked-brackets .final-series > span {
+  display: block;
+  color: #b6bec6;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.stacked-brackets .grand-final > p {
+  margin-bottom: 0;
+  text-align: center;
+}
+.stacked-brackets > .bracket-legend { padding: 0 4px 8px; border: 0; }
+@media (max-width: 1100px) {
+  .stacked-brackets .bracket-navigation {
+    display: block;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    color: #c2c7ce;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .stacked-brackets .bracket-navigation > div { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .stacked-brackets .bracket-navigation button { padding: 9px 12px; min-height: 40px; border: 1px solid #454a50; border-radius: 4px; color: #dfc3ac; font-size: 12px; }
+  .stacked-brackets .bracket-navigation button[aria-pressed="true"] { border-color: var(--accent); background: #f4874815; color: #ffd2b5; }
+}
+@media (max-width: 700px) {
+  .bracket-lane-heading { padding: 18px 16px; align-items: flex-start; flex-direction: column; gap: 8px; }
+  .bracket-lane-heading h3 { font-size: 16px; }
+  .stacked-brackets .grand-final { padding: 22px 16px; }
+  .stacked-brackets .grand-final h4 { font-size: 22px; }
+  .stacked-brackets .final-matches { flex-direction: column; align-items: center; }
+  .stacked-brackets .final-series > .bracket-match { width: 100%; }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "cs2-tournanmentmanager",
+  "main": "server/worker.ts",
+  "compatibility_date": "2026-01-01",
+  "keep_vars": true,
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api", "/api/*"],
+  },
+  // Wrangler inherits an existing DB binding. If absent, its resource
+  // provisioning creates one. Apply migrations 0001–0004 before using all management features.
+  "d1_databases": [{ "binding": "DB", "migrations_dir": "migrations" }],
+  "vars": {
+    "PUBLIC_ORIGIN": "https://cs2-tournanmentmanager.fierce-condor.workers.dev",
+  },
+}

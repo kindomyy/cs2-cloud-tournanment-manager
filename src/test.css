@@ -1,0 +1,585 @@
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.test-page {
+  padding-top: 45px;
+}
+.test-flask {
+  color: var(--accent);
+}
+.test-notice {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  border: 1px solid #4f3d2c;
+  background: #282017;
+  border-radius: 5px;
+  padding: 15px 19px;
+  margin-bottom: 22px;
+  color: #c9b69e;
+}
+.test-notice p {
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 0;
+}
+.test-notice strong {
+  font-weight: 600;
+  color: #e2c6a6;
+}
+.test-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 24px;
+}
+.test-tools button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #363b40;
+  border-radius: 4px;
+  padding: 11px 13px;
+  font-size: 10px;
+  color: #c1c4c6;
+  background: #191c1f;
+}
+.test-tools button:hover {
+  border-color: #7c6048;
+  color: var(--accent);
+}
+.test-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+  gap: 25px;
+  align-items: start;
+}
+.test-workspace.awaiting-confirm {
+  opacity: 0.45;
+  pointer-events: none;
+}
+.test-match-list {
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.test-match-list > h2 {
+  margin: 0;
+  padding: 17px 19px;
+  background: #1c1e20;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 500;
+}
+.test-match-list > h2 > span {
+  color: #9ca2a8;
+  font-size: 10px;
+}
+.test-match-list > button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 15px 18px;
+  border-top: 1px solid var(--border);
+  background: #17191b;
+  transition: background 0.2s;
+}
+.test-match-list > button:hover {
+  background: #232629;
+}
+.test-match-list > button.selected {
+  background: #2d251e;
+  box-shadow: inset 2px 0 var(--accent);
+}
+.test-match-list > button > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.test-match-list b {
+  font-size: 9px;
+  color: #c9a784;
+  font-weight: 500;
+}
+.test-match-list .status {
+  font-size: 8px;
+}
+.test-match-list > button > span {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.7;
+  margin: 8px 0 4px;
+  overflow-wrap: anywhere;
+}
+.test-match-list i {
+  color: #72787f;
+  font-style: normal;
+  margin: 0 6px;
+}
+.test-match-list small {
+  font-size: 9px;
+  color: #9ca2a8;
+}
+.test-editor-column {
+  position: sticky;
+  top: 24px;
+}
+.score-editor {
+  border: 1px solid #45403a;
+  border-radius: 6px;
+  background: #191b1d;
+  overflow: hidden;
+}
+.editor-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px;
+  border-bottom: 1px solid var(--border);
+  gap: 15px;
+}
+.editor-heading h2 {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 8px 0 0;
+  line-height: 1.5;
+}
+.editor-heading .eyebrow {
+  color: #c8a47d;
+}
+.editor-heading .status {
+  font-size: 8px;
+}
+.score-editor fieldset {
+  margin: 0;
+  padding: 23px;
+  border: 0;
+  min-width: 0;
+}
+.score-editor fieldset:disabled {
+  opacity: 0.4;
+}
+.field-label {
+  font-size: 11px;
+  color: #b4bac0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+select {
+  font: inherit;
+  background: #111416;
+  border: 1px solid #41474c;
+  color: #e4e3de;
+  border-radius: 4px;
+  padding: 12px;
+  width: 100%;
+  font-size: 12px;
+  color-scheme: dark;
+}
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.editor-score-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 18px;
+  padding-top: 28px;
+}
+.editor-score-row > label {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+.editor-score-row > label > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 550;
+  line-height: 1.5;
+  min-height: 30px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.editor-score-row input {
+  width: 100%;
+  text-align: center;
+  font-size: 34px;
+  padding: 14px 5px;
+  color: #f3eee8;
+  background: #111416;
+  font-variant-numeric: tabular-nums;
+}
+.score-divider {
+  padding-bottom: 22px;
+  color: #858c93;
+  font-size: 24px;
+}
+.editor-help {
+  font-size: 10px;
+  color: #a5abb1;
+  line-height: 1.9;
+  margin: 18px 0 25px;
+}
+.editor-submit {
+  margin-top: 23px;
+  width: 100%;
+  padding: 14px;
+  font-size: 12px;
+}
+.editor-info {
+  padding: 5px 22px 0;
+  font-size: 12px;
+  color: #ccb69a;
+  line-height: 1.9;
+}
+.form-error {
+  font-size: 12px;
+  color: #f2b1a3;
+  line-height: 1.8;
+  margin: 20px 0 0;
+  padding: 12px 15px;
+  border: 1px solid #6d4840;
+  border-radius: 4px;
+  background: #38241e;
+}
+.test-page > .form-error {
+  margin: 0 0 20px;
+}
+.save-notice {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 11px;
+  color: #b9d5b2;
+  background: #1e2c20;
+  border: 1px solid #3c553b;
+  padding: 16px;
+  border-radius: 4px;
+  margin-bottom: 23px;
+  line-height: 1.7;
+}
+.save-notice a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.change-confirm {
+  border: 1px solid #997345;
+  background: #33291e;
+  border-radius: 5px;
+  padding: 23px;
+  margin-bottom: 24px;
+}
+.change-confirm h2 {
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0 0 12px;
+}
+.change-confirm p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #dec6a6;
+  margin: 0 0 18px;
+}
+.change-confirm > div {
+  display: flex;
+  gap: 25px;
+}
+.change-confirm .button-primary {
+  font-size: 11px;
+}
+.final-setting {
+  border: 1px solid var(--border);
+  padding: 23px;
+  margin-top: 20px;
+  border-radius: 5px;
+  background: #17191a;
+}
+.final-setting h2 {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0 0 17px;
+}
+.final-setting label {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  align-items: center;
+  line-height: 1.7;
+}
+.final-setting input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+}
+.final-setting p {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #a3a9af;
+  margin: 15px 0 0;
+}
+.champion-banner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border: 1px solid #7c6946;
+  background: linear-gradient(120deg, #362e21, #191b1d);
+  border-radius: 5px;
+  padding: 22px;
+  margin-bottom: 25px;
+  color: #dcc098;
+}
+.champion-banner > div {
+  flex: 1;
+}
+.champion-banner h2 {
+  color: #f0e8db;
+  font-size: 25px;
+  letter-spacing: 2px;
+  margin: 8px 0 0;
+}
+.final-series {
+  width: 300px;
+  max-width: 100%;
+  margin-top: 20px;
+}
+.final-series > span {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #cbb08a;
+  margin-bottom: 10px;
+}
+.grand-final > h3 {
+  text-align: center;
+}
+.dialog-score-label {
+  text-align: center;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: #a6a9a9;
+  margin: -16px 0 25px;
+}
+.schedule-finished {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #b0b3b0;
+  padding: 25px 0;
+}
+.main-nav {
+  gap: 25px;
+}
+.header-inner {
+  gap: 30px;
+}
+.main-nav > a[href="#dene"] {
+  color: #e8b68c;
+}
+.featured-team h3 {
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+.featured-top > span:last-child {
+  white-space: nowrap;
+}
+@media (max-width: 1100px) {
+  .main-nav {
+    gap: 19px;
+  }
+  .main-nav > a {
+    font-size: 11px;
+  }
+  .season {
+    display: none;
+  }
+  .header-inner {
+    gap: 20px;
+  }
+}
+@media (max-width: 800px) {
+  .test-workspace {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    gap: 15px;
+  }
+  .test-match-list > button {
+    padding: 14px 12px;
+  }
+  .test-match-list > button > span {
+    font-size: 10px;
+  }
+  .editor-heading {
+    padding: 17px;
+    flex-wrap: wrap;
+  }
+  .editor-heading h2 {
+    font-size: 13px;
+  }
+  .score-editor fieldset {
+    padding: 17px;
+  }
+  .editor-score-row {
+    gap: 10px;
+  }
+  .editor-score-row > label > span {
+    font-size: 10px;
+  }
+  .editor-score-row input {
+    font-size: 28px;
+  }
+  .editor-help {
+    font-size: 9px;
+  }
+  .main-nav {
+    gap: 18px;
+  }
+  .main-nav > a {
+    font-size: 10px;
+  }
+  .header-inner {
+    gap: 18px;
+  }
+  .final-setting {
+    padding: 17px;
+  }
+}
+@media (max-width: 560px) {
+  .test-workspace {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .test-match-list {
+    width: 100%;
+    max-height: 330px;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #4f4337 #191b1d;
+  }
+  .test-match-list > h2 {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  .test-match-list > button {
+    padding: 13px 17px;
+  }
+  .test-match-list > button > span {
+    font-size: 11px;
+  }
+  .test-editor-column {
+    position: static;
+    width: 100%;
+  }
+  .test-page .section-heading h1 {
+    font-size: 28px;
+  }
+  .test-flask {
+    display: none;
+  }
+  .test-notice {
+    align-items: flex-start;
+    padding: 14px;
+    gap: 10px;
+  }
+  .test-notice > svg {
+    margin-top: 4px;
+  }
+  .test-notice p {
+    font-size: 10px;
+  }
+  .test-tools {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .test-tools button {
+    padding: 12px 8px;
+    font-size: 9px;
+  }
+  .save-notice {
+    flex-wrap: wrap;
+    font-size: 10px;
+  }
+  .save-notice a {
+    margin: 5px 0 0 23px;
+  }
+  .editor-score-row input {
+    font-size: 33px;
+  }
+  .editor-score-row > label > span {
+    font-size: 11px;
+  }
+  .editor-help {
+    font-size: 10px;
+  }
+  .field-label {
+    font-size: 11px;
+  }
+  .final-setting p {
+    font-size: 11px;
+  }
+  .change-confirm {
+    padding: 18px;
+  }
+  .change-confirm p {
+    font-size: 11px;
+  }
+  .change-confirm > div {
+    gap: 20px;
+  }
+  .change-confirm .button-primary {
+    font-size: 10px;
+    padding: 12px;
+  }
+  .main-nav {
+    gap: 2px;
+    padding: 10px 12px;
+  }
+  .main-nav > a {
+    font-size: 10px;
+    padding: 14px 3px;
+  }
+  .main-nav > a[href="#dene"] {
+    flex: 1.4;
+  }
+  .season {
+    display: none;
+  }
+  .champion-banner {
+    padding: 19px 15px;
+    gap: 13px;
+  }
+  .champion-banner h2 {
+    font-size: 22px;
+  }
+  .champion-banner > .team-mark.large {
+    width: 52px;
+    height: 52px;
+  }
+  .champion-banner > .team-mark.large svg {
+    width: 35px;
+    height: 35px;
+  }
+}

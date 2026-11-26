@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS arena_config (id INTEGER PRIMARY KEY CHECK(id=1), revision INTEGER NOT NULL, config TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS arena_sessions (token_hash TEXT PRIMARY KEY, role TEXT NOT NULL, steam_id TEXT, expires INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS steam_users (steam_id TEXT PRIMARY KEY, verified_at INTEGER NOT NULL, game_name TEXT);
+CREATE TABLE IF NOT EXISTS steam_nonces (state_hash TEXT PRIMARY KEY, expires INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS login_attempts (key TEXT PRIMARY KEY, count INTEGER NOT NULL, expires INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS match_ready (match_id TEXT NOT NULL, player_id TEXT NOT NULL, expires INTEGER NOT NULL, PRIMARY KEY(match_id,player_id));
+CREATE TABLE IF NOT EXISTS match_veto (match_id TEXT PRIMARY KEY, revision INTEGER NOT NULL, state TEXT NOT NULL);
